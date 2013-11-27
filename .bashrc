@@ -23,8 +23,6 @@ export HISTSIZE=1000000
 export PROMPT_COMMAND='history -a'
 shopt -s histappend
 
-export ANDROID_SDK=/Users/$USER/adt-bundle-mac/sdk
-export ANDROID_NDK=/Users/$USER/android-ndk-r8b
 export EDITOR=`which vim`
 export SVN_EDITOR=`which vim`
 export GIT_EDITOR=`which vim`
@@ -104,4 +102,15 @@ function ex() {
      fi
 }
 
-PROMPT_COMMAND='RET=$?; if [[ $RET -eq 0 ]]; then echo -ne "\033[0;32m$RET\033[0m"; else echo -ne "\033[0;31m$RET\033[0m"; fi; echo -n " "'
+_compute_prompt() {
+    RET=$?
+    if [[ $RET -eq 0 ]]; then
+        PS1="\[\033[0;32m\]$RET\[\033[0m\] "
+    else
+        PS1="\[\033[0;31m\]$RET\[\033[0m\] "
+    fi
+    PS1+='\u@\h:\w \$ '
+}
+
+PROMPT_COMMAND=_compute_prompt
+_compute_prompt
