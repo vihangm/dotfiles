@@ -5,7 +5,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="tjkirch_mod"
+ZSH_THEME="vihang"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -48,24 +48,23 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(brew git git-extras lol node npm nyan osx pip pylint python rand-quote sublime)
+plugins=(brew git git-extras gitfast node npm nyan osx pip pylint python rand-quote sublime urltools vagrant zsh-syntax-highlighting history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin"
+export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=green,fg=white,bold'
+export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=white,bold'
+
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+# Preferred editor
+export EDITOR='vim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -75,6 +74,11 @@ export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin"
 
 export GREP_OPTIONS='--color=auto'
 export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
+
+#bindkey "^[[A" history-beginning-search-backward
+#bindkey "^[[B" history-beginning-search-forward
+bindkey "^[[1;5D" backward-word
+bindkey "^[[1;5C" forward-word
 
 # Alias
 alias ls='ls -lhG'
