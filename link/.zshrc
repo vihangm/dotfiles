@@ -48,7 +48,7 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(brew git git-extras gitfast node npm nyan osx pip pylint python rand-quote sublime urltools vagrant zsh-syntax-highlighting history-substring-search)
+plugins=(brew docker git git-extras gitfast node npm nyan osx pip pylint python rand-quote sublime urltools vagrant zsh-syntax-highlighting history-substring-search z)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -92,3 +92,8 @@ export HISTSIZE=1000000
 
 # Go Fast!
 export AUTO_CD="true"
+
+# SSH Agent
+if [[ -z SSH_AGENT_PID ]]; then
+  eval $(ssh-agent)
+fi
