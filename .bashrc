@@ -1,6 +1,18 @@
 #
 # ~/.bashrc
 #
+# This is the initialization file for bash, and is read each time an instance of
+# your shell executes. A shell starts up, for example, when you open a new xterm
+# window, remotely log on to another machine, or type 'bash' or 'sh' to start a
+# new shell explicitly.
+#
+# Refer to bash(1) for more information.
+#
+# The shell treats lines beginning with # as comments.
+#
+# EDIT THIS FILE to customize *only* shell-specific options for bash (e.g.
+# prompt). All other shell options go in ~/.environment.
+#
 
 # Set the shell to prevent programs from dumping core.
 ulimit -c 0
@@ -56,6 +68,7 @@ alias ls='ls -lh $LS_COLOR'
 alias la='ls -lah $LS_COLOR'
 alias ..='cl ..'
 alias clr='clear'
+alias gd1='git diff HEAD..HEAD^'
 
 # Auto completion
 complete -cf sudo
@@ -67,6 +80,7 @@ function cl(){ cd "$@" && la; }
 # Two standard functions to change $PATH
 add_path() { export PATH="$PATH:$1"; }
 add_pre_path() { export PATH="$1:$PATH"; }
+
 # Extract based upon file ext
 function ex() {
      if [ -f $1 ] ; then

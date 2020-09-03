@@ -54,7 +54,7 @@ function gg {
     flags='--reverse'
   fi
 
-  local tmpdir="$(mktemp -d)"
+  local tmpdir="$(mktemp -d tmp.XXXXXXXXXX)"
   local active="$(_gitbr)"
   (
     local index=0

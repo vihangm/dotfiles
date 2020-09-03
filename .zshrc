@@ -48,16 +48,16 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(brew docker git git-extras gitfast node npm nyan osx pip pylint python rand-quote sublime urltools vagrant zsh-syntax-highlighting history-substring-search z)
+plugins=(brew git git-extras gitfast osx pip pylint python rand-quote sublime urltools zsh-syntax-highlighting history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:/usr/local/sbin:/usr/local/bin:/bin:/usr/sbin:/sbin:/usr/bin"
 
 export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=green,fg=white,bold'
 export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=white,bold'
-
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -70,21 +70,22 @@ export EDITOR='vim'
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
+export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 export GREP_OPTIONS='--color=auto'
 export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 
-#bindkey "^[[A" history-beginning-search-backward
-#bindkey "^[[B" history-beginning-search-forward
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
 bindkey "^[[1;5D" backward-word
 bindkey "^[[1;5C" forward-word
 
 # Alias
-alias ls='ls -lhG'
+alias ls='ls -lahG'
 alias la='ls -lahG'
 alias clr='clear'
-alias szrc='source ~/.zshrc'
+alias gdf='cdiff -s -w 100'
+alias gd1='cdiff -s -w 100 HEAD\^..HEAD'
 
 # set history settings
 export HIST_IGNORE_ALL_DUPS="true"
@@ -93,7 +94,12 @@ export HISTSIZE=1000000
 # Go Fast!
 export AUTO_CD="true"
 
-# SSH Agent
-if [[ -z SSH_AGENT_PID ]]; then
-  eval $(ssh-agent)
+# The next line updates PATH for the Google Cloud SDK.
+source '/Users/vihang/google-cloud-sdk/path.zsh.inc'
+
+# The next line enables shell command completion for gcloud.
+source '/Users/vihang/google-cloud-sdk/completion.zsh.inc'
+
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
 fi

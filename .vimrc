@@ -1,6 +1,14 @@
 "
 " ~/.vimrc
 "
+" This is your Vim initialization file. It is read on Vim startup.
+"
+" Change this file to customize your Vim settings.
+" 
+" Vim treats lines beginning with " as comments.
+"
+" EXAMPLES are available in /usr/local/doc/startups.
+"
 
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
@@ -31,9 +39,9 @@ endif
 
 " Have Vim load indentation rules according to the detected filetype. Per
 " default Debian Vim only load filetype specific plugins.
-if has("autocmd")
-  filetype indent on
-endif
+"if has("autocmd")
+"  filetype indent on
+"endif
 
 set showcmd            " Show (partial) command in status line.
 set showmatch          " Show matching brackets.
@@ -59,20 +67,27 @@ set formatoptions=rocq " Line break comments and understand how to 'gqap' commen
 set linebreak          " Only break lines at word boundaries
 set number
 set so=20
+
+
+"--------------------------------"
+"---Stolen from andrew's vimrc---"
 set history=128     " Remember last 128 commands
 set report=0        " Always report number of lines altered
 "set vb t_vb=       " No bell or visual bell
 set undolevels=4096 " Lots of undo
 set nomodeline      " Mode lines are scary (arbitrary command execution!)
+"--------------------------------"
 
 filetype plugin indent on 
-autocmd FileType python setlocal ts=4 softtabstop=4 et cinwords=if,elif,else,for,while,try,except,finally,def,class
+autocmd FileType python setlocal smartindent shiftwidth=4 ts=4 softtabstop=4 et cinwords=if,elif,else,for,while,try,except,finally,def,class
 
 
-if &term =~ "xterm"
+if &term =~ "xterm" || &term =~ "screen"
   "256 color --
   let &t_Co=256
   colorscheme solarized
+  " restore screen after quitting
+  " set t_ti=ESC7ESC[rESC[?47h t_te=ESC[?47lESC8
   if has("terminfo")
     let &t_Sf="\ESC[3%p1%dm"
     let &t_Sb="\ESC[4%p1%dm"
