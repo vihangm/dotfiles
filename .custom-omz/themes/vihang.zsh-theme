@@ -24,11 +24,12 @@ zstyle ':vcs_info:*:prompt:*' check-for-changes true
 # %b - branchname
 # %u - unstagedstr (see below)
 # %c - stagedstr (see below)
+# %m - misc (see below)
 # %a - action (e.g. rebase-i)
 # %R - repository path
 # %S - path in the repository
 PR_RST="%{${reset_color}%}"
-FMT_BRANCH="(%{$cyan%}%b%u%c${PR_RST})"
+FMT_BRANCH="(%{$cyan%}%b%u%c%m${PR_RST})"
 FMT_ACTION="(%{$green%}%a${PR_RST})"
 FMT_UNSTAGED="%{$yellow%}●"
 FMT_STAGED="%{$green%}●"
@@ -39,20 +40,13 @@ zstyle ':vcs_info:*:prompt:*' actionformats "${FMT_BRANCH}${FMT_ACTION}"
 zstyle ':vcs_info:*:prompt:*' formats       "${FMT_BRANCH}"
 zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
 
-function steeef_precmd {
-  # check for untracked files or updated submodules, since vcs_info doesn't
-  if git ls-files --other --exclude-standard 2> /dev/null | grep -q "."; then
-      PR_GIT_UPDATE=1
-      FMT_BRANCH="(%{$cyan%}%b%u%c%{$red%}●${PR_RST})"
-  else
-      FMT_BRANCH="(%{$cyan%}%b%u%c${PR_RST})"
+zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
+
++vi-git-untracked() {
+  if [[ -n "$(git ls-files --others --exclude-standard)" ]]; then
+    hook_com[misc]="%{$red}●"
   fi
-  zstyle ':vcs_info:*:prompt:*' formats "${FMT_BRANCH} "
-
-  vcs_info 'prompt'
 }
-add-zsh-hook precmd steeef_precmd
-
 
 precmd(){
   local preprompt_left="%(?,%{$green%}$?%{$reset_color%},%{$red%}$?%{$reset_color%}) %{$magenta%}%n%{$reset_color%} at %{$yellow%}%m%{$reset_color%} in %{$blue%}%~%{$reset_color%} $vcs_info_msg_0_"
