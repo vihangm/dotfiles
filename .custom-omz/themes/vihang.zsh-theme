@@ -49,6 +49,7 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
 }
 
 precmd(){
+  vcs_info 'prompt'
   local preprompt_left="%(?,%{$green%}$?%{$reset_color%},%{$red%}$?%{$reset_color%}) %{$magenta%}%n%{$reset_color%} at %{$yellow%}%m%{$reset_color%} in %{$blue%}%~%{$reset_color%} $vcs_info_msg_0_"
   local preprompt_right="%{$fg[green]%}[%*]%{$reset_color%}"
   local preprompt_left_length=${#${(S%%)preprompt_left//(\%([KF1]|)\{*\}|\%[Bbkf])}}
