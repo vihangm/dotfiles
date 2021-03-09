@@ -10,7 +10,6 @@ yellow="$fg[yellow]"
 magenta="$fg[magenta]"
 red="$fg[red]"
 green="$fg[green]"
-red="$fg[red]"
 blue="$fg[blue]"
 
 # enable VCS systems you use
@@ -44,14 +43,24 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
 
 +vi-git-untracked() {
   if [[ -n "$(git ls-files --others --exclude-standard)" ]]; then
-    hook_com[misc]="%{$red}●"
+    hook_com[misc]="%{$red%}●"
   fi
 }
 
 precmd(){
+  # grab exit code before anything else
+  local LAST_EXIT=$?
+  local EXIT_STATUS=""
+  if [ $LAST_EXIT -ne 0 ]; then
+    EXIT_STATUS+="%{$red%}"
+  else
+    EXIT_STATUS+="%{$green%}"
+  fi
+  EXIT_STATUS+="$LAST_EXIT%{$reset_color%}"
+
   vcs_info 'prompt'
-  local preprompt_left="%(?,%{$green%}$?%{$reset_color%},%{$red%}$?%{$reset_color%}) %{$magenta%}%n%{$reset_color%} at %{$yellow%}%m%{$reset_color%} in %{$blue%}%~%{$reset_color%} $vcs_info_msg_0_"
-  local preprompt_right="%{$fg[green]%}[%*]%{$reset_color%}"
+  local preprompt_left="$EXIT_STATUS %{$magenta%}%n%{$reset_color%} at %{$yellow%}%m%{$reset_color%} in %{$blue%}%~%{$reset_color%} $vcs_info_msg_0_"
+  local preprompt_right="%{$green%}[%*]%{$reset_color%}"
   local preprompt_left_length=${#${(S%%)preprompt_left//(\%([KF1]|)\{*\}|\%[Bbkf])}}
   local preprompt_right_length=${#${(S%%)preprompt_right//(\%([KF1]|)\{*\}|\%[Bbkf])}}
   local num_filler_spaces=$((COLUMNS - preprompt_left_length - preprompt_right_length))
