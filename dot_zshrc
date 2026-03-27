@@ -1,0 +1,66 @@
+export ZSH=$HOME/.oh-my-zsh
+
+ZSH_THEME="vihang"
+COMPLETION_WAITING_DOTS="true"
+plugins=(brew git git-extras gitfast pip python urltools zsh-syntax-highlighting history-substring-search)
+
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+export GOPATH="$HOME/go"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin::$GOPATH/bin:$HOME/bin:$HOME/.local/bin"
+
+export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=green,fg=white,bold'
+export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=white,bold'
+
+export EDITOR='vim'
+
+if [ -x /usr/bin/dircolors ]; then
+   test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+fi
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+
+export GREP_OPTIONS='--color=auto'
+export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
+
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
+bindkey "^[[1;5D" backward-word
+bindkey "^[[1;5C" forward-word
+
+# Alias
+alias ls='ls -lah --color=auto'
+alias la='ls -lah'
+alias clr='clear'
+alias gdf='git diff'
+alias gd1='git diff HEAD\^..HEAD'
+
+# set history settings
+export HIST_IGNORE_ALL_DUPS="true"
+export HISTSIZE=1000000
+
+# Go Fast!
+export AUTO_CD="true"
+
+if [[ -f /opt/gml_dev/gmlenv.inc ]]; then
+  source /opt/gml_dev/gmlenv.inc
+fi
+
+function cSha() {
+    curl -sL "$1" | shasum -a 256
+}
+
+function bazel() {
+  if [[ "$1" == "clean" ]]; then
+    echo "STOP. DO NOT BAZEL CLEAN. YOU ARE NOT ALLOWED TO DO THAT."
+    return 1
+  else
+    command bazel "$@"
+  fi
+}
+
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+fi
