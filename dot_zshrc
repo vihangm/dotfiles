@@ -9,7 +9,7 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 export GOPATH="$HOME/go"
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin::$GOPATH/bin:$HOME/bin:$HOME/.local/bin"
+export PATH="$PYENV_ROOT/bin::$GOPATH/bin:$HOME/bin:$HOME/.local/bin:$HOME/.opencode/bin:$PATH"
 
 export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=green,fg=white,bold'
 export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=white,bold'
