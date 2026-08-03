@@ -63,6 +63,8 @@ function bazel() {
 
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
+  if pyenv commands | grep -qx "virtualenv-init"; then
+    eval "$(pyenv virtualenv-init -)"
+  fi
 fi
 
