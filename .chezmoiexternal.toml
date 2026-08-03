@@ -18,17 +18,13 @@
     exact = true
     stripComponents = 1
     refreshPeriod = "168h"
-[".vim/autoload/pathogen.vim"]
-    type = "file"
-    url = "https://raw.githubusercontent.com/tpope/vim-pathogen/refs/heads/master/autoload/pathogen.vim"
-    refreshPeriod = "168h"
-[".vim/bundle/vim-colors-solarized"]
+[".vim/pack/vihang/opt/solarized8"]
     type = "archive"
-    url = "https://github.com/altercation/vim-colors-solarized/archive/master.tar.gz"
+    url = "https://codeberg.org/lifepillar/vim-solarized8/archive/master.tar.gz"
     exact = true
     stripComponents = 1
     refreshPeriod = "168h"
-[".vim/bundle/vim-indent-guides"]
+[".vim/pack/vihang/start/vim-indent-guides"]
     type = "archive"
     url = "https://github.com/preservim/vim-indent-guides/archive/master.tar.gz"
     exact = true
