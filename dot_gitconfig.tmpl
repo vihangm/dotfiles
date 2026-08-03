@@ -1,7 +1,9 @@
 [user]
     name = Vihang Mehta
-    email = {{ .git_email }}
-    signingkey = {{ .git_signingkey }}
+    email = {{ default "vihang@cs.brown.edu" .git_email }}
+{{- with .git_signingkey }}
+    signingkey = {{ . }}
+{{- end }}
 [github]
     user = vihangm
 [color]

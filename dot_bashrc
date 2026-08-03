@@ -117,5 +117,7 @@ function bazel() {
   fi
 }
 
+export PATH="$HOME/.cargo/bin:$PATH"
+
 PROMPT_COMMAND=_compute_prompt
 _compute_prompt

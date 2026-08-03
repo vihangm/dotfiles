@@ -1,0 +1,7 @@
+{{- $git_email := promptStringOnce . "git_email" "Email address to author git commits" -}}
+{{- $git_signingkey := promptStringOnce . "git_signingkey" "GPG Key used to sign git commits" -}}
+
+[data]
+    git_email = {{ $git_email | quote }}
+    git_signingkey = {{ $git_signingkey | quote }}
+

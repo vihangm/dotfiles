@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+export PATH="$HOME/.cargo/bin:$PATH"
+
+if command -v difft >/dev/null 2>&1; then
+    echo "difftastic already installed"
+    exit 0
+fi
+
+cargo install difftastic
